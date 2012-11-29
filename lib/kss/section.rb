@@ -15,9 +15,11 @@ module Kss
     #
     # comment_text - The raw comment String, minus any comment syntax.
     # filename     - The filename as a String.
-    def initialize(comment_text=nil, filename=nil)
+    # path         - The relative path of the file as a String
+    def initialize(comment_text=nil, filename=nil, path=nil)
       @raw = comment_text
       @filename = filename
+      @path = path
     end
 
     # Splits up the raw comment text into comment sections that represent

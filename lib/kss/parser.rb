@@ -26,7 +26,8 @@ module Kss
 
     def add_section comment_text, filename
       base_name = File.basename(filename)
-      section = Section.new(comment_text, base_name)
+      path = File.dirname(filename)
+      section = Section.new(comment_text, base_name, path)
       @sections[section.section] = section
     end
 
