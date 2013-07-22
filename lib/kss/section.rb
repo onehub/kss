@@ -85,7 +85,7 @@ module Kss
   
     def section_comment
       comment_sections.find do |text|
-        text =~ /Styleguide \d/i
+        text =~ Parser::STYLEGUIDE_PATTERN
       end.to_s
     end
   

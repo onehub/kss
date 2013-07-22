@@ -31,7 +31,14 @@ a.button.star.disabled{
 }
 ```
 
-## Ruby Library
+KSS can also support words as Styleguide section names
+```scss
+// Styleguide Forms.Checkboxes.
+// - or -
+// Styleguide Forms - Special Checkboxes.
+```
+
+## Ruby Library [![Build Status](https://travis-ci.org/kneath/kss.png)](https://travis-ci.org/kneath/kss) [![Code Climate](https://codeclimate.com/github/kneath/kss.png)](https://codeclimate.com/github/kneath/kss)
 
 This repository includes a ruby library suitable for parsing SASS, SCSS, and CSS documented with KSS guidelines. To use the library, include it in your project as a gem from <https://rubygems.org/gems/kss>. Then, create a parser and explore your KSS.
 
@@ -55,7 +62,38 @@ styleguide.section('2.1.1').modifiers.first.class_name
 
 styleguide.section('2.1.1').modifiers.first.description
 # => 'Subtle hover highlight'
+```
 
+You can also initialize the `Kss::Parser` with a string CSS by using `Kss::Parser.new(string)`
+
+```ruby
+buttons =<<-'EOS'
+  /*
+  Your standard form button.
+
+  :hover    - Highlights when hovering.
+  :disabled - Dims the button when disabled.
+
+  Styleguide 1.1
+  */
+  button {
+    padding: 5px 15px;
+    line-height: normal;
+    /* ... */
+  }
+  button:disabled {
+    opacity: 0.5;
+  }
+EOS
+styleguide = Kss::Parser.new(buttons)
+
+styleguide.section('1.1')
+# => <Kss::Section>
+
+styleguide.section('1.1.1').description
+# => "Your standard form button."
+
+# ...
 ```
 
 The library is also fully TomDoc'd, completing the circle of life.
@@ -76,3 +114,8 @@ To hack on KSS, you'll need to install dependencies with `bundle install`. Run t
 To make your life easier, I suggest `bundle install --binstubs` and adding `bin/` to your `$PATH`. If you don't understand this, just blindly add `bundle exec` in front of everything you'd normally do, like `bundle exec rake`.
 
 I apologize on behalf of the Ruby community for this, it's embarrassing and disappointing that dependency management is still so clumsy.
+
+## Implementations
+
+The KSS specification has also been implemented in [Python](https://github.com/seanbrant/pykss), [Node.js](https://github.com/hughsk/kss-node) and [PHP](https://github.com/scaninc/kss-php)
+
