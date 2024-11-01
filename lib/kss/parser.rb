@@ -19,7 +19,7 @@ module Kss
         if Dir.exists?(path_or_string)
           # argument is a path
           path = path_or_string
-          Dir["#{path}/**/*.{css,less,sass,scss}"].each do |filename|
+          Dir["#{path}/**/*.{css,less,sass,scss,erb}"].each do |filename|
             parser = CommentParser.new(filename)
             parser.blocks.each do |comment_block|
               add_section comment_block, filename if self.class.kss_block?(comment_block)
