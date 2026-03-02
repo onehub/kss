@@ -54,9 +54,11 @@ WORKDIR /app
 COPY . .
 
 RUN --mount=type=cache,target=/bundle-cache \
-    bundle config set --local path /bundle-cache \
+    (bundle config set --local path /bundle-cache 2>/dev/null \
+      || bundle config --local path /bundle-cache) \
     && (bundle check || bundle install --jobs $(nproc)) \
     && mkdir -p vendor/bundle \
-    && cp -a /bundle-cache/* vendor/bundle/ \
-    && bundle config set --local path vendor/bundle
+    && cp -a /bundle-cache/. vendor/bundle/ \
+    && (bundle config set --local path vendor/bundle 2>/dev/null \
+      || bundle config --local path vendor/bundle)
 CMD ["bundle", "exec", "rake", "test"]

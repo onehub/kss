@@ -1,4 +1,4 @@
-if ENV["COVERAGE"]
+if ENV["COVERAGE"] == "1"
   require "simplecov"
   SimpleCov.start do
     enable_coverage :branch
