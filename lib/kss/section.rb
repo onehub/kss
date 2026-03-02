@@ -18,6 +18,7 @@ module Kss
     def initialize(comment_text=nil, filename=nil)
       @raw = comment_text
       @filename = filename
+      @section = nil
     end
 
     # Splits up the raw comment text into comment sections that represent
