@@ -10,3 +10,4 @@ SPEC.md
 docker-bake.hcl
 example
 test-all-rubies.sh
+coverage/

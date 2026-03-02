@@ -9,6 +9,7 @@ group :test do
     gem "minitest", "~> 5.0.4"
   end
   gem "test-unit" unless RUBY_VERSION < "2.0"
+  gem "simplecov", require: false if RUBY_VERSION >= "2.4"
 end
 
 group :development do

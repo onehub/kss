@@ -31,7 +31,10 @@ jobs:
           - "3.4"
           - "4.0"
           - head
+        coverage: [0]
         include:
+          - ruby: "4.0"
+            coverage: 1
           - ruby: head
             allow_failure: true
     steps:
@@ -42,7 +45,7 @@ jobs:
         env:
           RUBY: ${{ matrix.ruby }}
       - name: Test
-        run: docker run --rm "kss-test:${{ matrix.ruby }}"
+        run: docker run --rm -e COVERAGE=${{ matrix.coverage }} "kss-test:${{ matrix.ruby }}"
 
   gate:
     name: All Tests
