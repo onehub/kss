@@ -35,6 +35,7 @@ group "default" {
     "ruby-3-3",
     "ruby-3-4",
     "ruby-4-0",
+    "ruby-head",
   ]
 }
 
@@ -221,4 +222,10 @@ target "ruby-4-0" {
     INSTALL_BUNDLER = VERSIONS["4.0"].bundler
   }
   tags = ["kss-test:4.0"]
+}
+
+target "ruby-head" {
+  dockerfile = "Dockerfile.head"
+  context    = "."
+  tags       = ["kss-test:head"]
 }

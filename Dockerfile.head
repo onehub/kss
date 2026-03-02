@@ -1,0 +1,31 @@
+FROM debian:bookworm
+
+RUN apt-get update && apt-get install -y \
+    autotools-dev autoconf bison build-essential curl ca-certificates git \
+    ruby \
+    libssl-dev libreadline-dev libffi-dev libyaml-dev zlib1g-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN git clone --depth 1 https://github.com/ruby/ruby.git /usr/local/src/ruby \
+    && cd /usr/local/src/ruby \
+    && ./autogen.sh \
+    && cp /usr/share/misc/config.guess tool/ \
+    && cp /usr/share/misc/config.sub tool/ \
+    && ./configure --prefix=/opt/rubies/ruby-head --disable-install-doc \
+    && make -j"$(nproc)" \
+    && make install \
+    && rm -rf /usr/local/src/ruby
+
+ENV PATH=/opt/rubies/ruby-head/bin:$PATH
+ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+
+WORKDIR /app
+COPY . .
+
+RUN --mount=type=cache,target=/bundle-cache \
+    bundle config set --local path /bundle-cache \
+    && (bundle check || bundle install --jobs $(nproc)) \
+    && mkdir -p vendor/bundle \
+    && cp -a /bundle-cache/* vendor/bundle/ \
+    && bundle config set --local path vendor/bundle
+CMD ["bundle", "exec", "rake", "test"]

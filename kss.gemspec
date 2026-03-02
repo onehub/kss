@@ -8,7 +8,6 @@ Gem::Specification.new do |s|
   s.homepage          = "http://github.com/kneath/kss"
   s.email             = "kneath@gmail.com"
   s.authors           = [ "Kyle Neath" ]
-  s.has_rdoc          = false
   s.license           = "MIT"
 
   s.files             = %w( README.md Rakefile LICENSE )

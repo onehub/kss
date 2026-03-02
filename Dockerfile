@@ -53,5 +53,10 @@ RUN if [ -n "$INSTALL_BUNDLER" ]; then \
 WORKDIR /app
 COPY . .
 
-RUN bundle install --jobs $(nproc)
+RUN --mount=type=cache,target=/bundle-cache \
+    bundle config set --local path /bundle-cache \
+    && (bundle check || bundle install --jobs $(nproc)) \
+    && mkdir -p vendor/bundle \
+    && cp -a /bundle-cache/* vendor/bundle/ \
+    && bundle config set --local path vendor/bundle
 CMD ["bundle", "exec", "rake", "test"]

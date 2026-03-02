@@ -1,1 +1,12 @@
+.bundle
+.git
+.github
+Dockerfile*
 Gemfile.lock
+Knylefile
+LICENSE
+README.md
+SPEC.md
+docker-bake.hcl
+example
+test-all-rubies.sh
