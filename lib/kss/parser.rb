@@ -16,7 +16,7 @@ module Kss
       @sections = {}
 
       paths_or_strings.each do |path_or_string|
-        if Dir.exist?(path_or_string)
+        if Dir.exists?(path_or_string)
           # argument is a path
           path = path_or_string
           Dir["#{path}/**/*.{css,less,sass,scss,erb}"].each do |filename|
