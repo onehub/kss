@@ -66,7 +66,9 @@ module Kss
     def initialize(file_path_or_string_input, options={})
       @options = options
       @options[:preserve_whitespace] = false if @options[:preserve_whitespace].nil?
-      if File.exists?(file_path_or_string_input)
+      @file_path = nil
+      @string_input = nil
+      if File.exist?(file_path_or_string_input)
         @file_path = file_path_or_string_input
       else
         @string_input = file_path_or_string_input

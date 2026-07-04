@@ -23,6 +23,7 @@ module Kss
       @raw = comment_text
       @filename = filename
       @path = path
+      @section = nil
     end
 
     # Splits up the raw comment text into comment sections that represent

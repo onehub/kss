@@ -40,8 +40,8 @@ comment
   end
 
   test "parses word phrases as styleguide references" do
-    @comment_text.gsub!('2.1.1', 'Buttons - Truly Lime')
-    section = Kss::Section.new(@comment_text, 'example.css')
+    text = @comment_text.gsub('2.1.1', 'Buttons - Truly Lime')
+    @section = Kss::Section.new(text, 'example.css')
     assert_equal 'Buttons - Truly Lime', @section.section
   end
 
